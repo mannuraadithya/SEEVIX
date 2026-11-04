@@ -1,0 +1,487 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --primary: #2563eb;
+    --text: #172033;
+    --muted: #718096;
+    --border: #e5eaf2;
+    --background: #f6f8fc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+button, select {
+    font: inherit;
+}
+
+.topbar {
+    height: 72px;
+    padding: 0 7%;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.brand-icon {
+    width: 34px;
+    height: 34px;
+    background: var(--primary);
+    color: white;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #526078;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.container {
+    width: min(1400px, 92%);
+    margin: 38px auto 55px;
+}
+
+.page-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.eyebrow {
+    color: var(--primary);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.page-heading h1 {
+    font-size: 29px;
+    letter-spacing: -1px;
+    margin: 8px 0;
+}
+
+.page-heading p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.refresh-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 15px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    color: #526078;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.refresh-button:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 19px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+}
+
+.stat-icon.blue {
+    color: #2563eb;
+    background: #edf3ff;
+}
+
+.stat-icon.orange {
+    color: #d68b13;
+    background: #fff5e5;
+}
+
+.stat-icon.green {
+    color: #16865b;
+    background: #e7f7ef;
+}
+
+.stat-icon.purple {
+    color: #8254c7;
+    background: #f3edff;
+}
+
+.stat-card span {
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.stat-card h2 {
+    font-size: 22px;
+    margin-top: 5px;
+}
+
+.map-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 18px;
+    align-items: start;
+}
+
+.map-card,
+.filter-card,
+.issues-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.map-header {
+    padding: 19px 21px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.map-header h2 {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.map-header p {
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.live-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 9px;
+    font-weight: 800;
+    color: #16865b;
+    white-space: nowrap;
+}
+
+.live-label span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #16a36a;
+}
+
+#map {
+    height: 560px;
+    width: 100%;
+    background: #e9eef5;
+    z-index: 1;
+}
+
+.map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px 20px;
+    border-top: 1px solid var(--border);
+}
+
+.map-legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 9px;
+    color: #66748a;
+}
+
+.legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+.legend-dot.road { background: #e34b4b; }
+.legend-dot.garbage { background: #d89a20; }
+.legend-dot.water { background: #2785d7; }
+.legend-dot.other { background: #8756c8; }
+
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.filter-card {
+    padding: 19px;
+}
+
+.filter-card h3,
+.issues-heading h3 {
+    font-size: 14px;
+    margin-bottom: 17px;
+}
+
+.filter-card label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    margin: 14px 0 7px;
+}
+
+.filter-card select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: white;
+    font-size: 10px;
+    color: var(--text);
+    outline: none;
+}
+
+.filter-card select:focus {
+    border-color: var(--primary);
+}
+
+.filter-card button {
+    width: 100%;
+    margin-top: 17px;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.filter-card button:hover {
+    background: #1d4ed8;
+}
+
+.issues-card {
+    padding: 18px;
+}
+
+.issues-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.issues-heading h3 {
+    margin-bottom: 5px;
+}
+
+.issues-heading p {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.issues-heading > i {
+    color: var(--primary);
+}
+
+.issue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.issue-item {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.issue-item:hover {
+    border-color: var(--primary);
+    background: #f8faff;
+}
+
+.issue-item h4 {
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+
+.issue-item p {
+    font-size: 9px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.issue-item .issue-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 9px;
+}
+
+.issue-status {
+    color: #b07810;
+    font-weight: 700;
+}
+
+.no-issues {
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 25px 5px;
+}
+
+.map-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 17px;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.map-note i {
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.leaflet-popup-content {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+}
+
+.leaflet-popup-content strong {
+    font-size: 12px;
+}
+
+.leaflet-popup-content p {
+    font-size: 10px;
+    color: #66748a;
+    margin: 5px 0;
+}
+
+.leaflet-popup-content a {
+    font-size: 10px;
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+@media (max-width: 1000px) {
+    .map-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .side-panel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+
+    #map {
+        height: 450px;
+    }
+}
+
+@media (max-width: 650px) {
+    .container {
+        width: 94%;
+        margin-top: 25px;
+    }
+
+    .topbar {
+        padding: 0 5%;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 9px;
+    }
+
+    .stat-card {
+        padding: 12px;
+        gap: 9px;
+    }
+
+    .stat-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    .stat-card h2 {
+        font-size: 18px;
+    }
+
+    .side-panel {
+        display: flex;
+    }
+
+    #map {
+        height: 370px;
+    }
+
+    .map-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

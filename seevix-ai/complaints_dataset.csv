@@ -1,0 +1,39 @@
+description,category
+"There is a huge pothole on the main road",Roads
+"The road surface is badly damaged",Roads
+"Several potholes are causing traffic problems",Roads
+"The footpath is broken near the bus stop",Roads
+"There are cracks on the road near our college",Roads
+"Road construction has been left incomplete",Roads
+"The street is filled with potholes after rain",Roads
+"The road surface is uneven and dangerous",Roads
+"Garbage is overflowing from the public dustbin",Garbage
+"People are dumping waste on the roadside",Garbage
+"Uncollected garbage is creating a bad smell",Garbage
+"The garbage collection vehicle has not arrived",Garbage
+"Plastic waste is scattered across the street",Garbage
+"The public area is filled with rubbish",Garbage
+"Garbage has accumulated near the market",Garbage
+"The dustbin has not been emptied for days",Garbage
+"There is a water pipeline leakage near my house",Water
+"Clean drinking water is not being supplied",Water
+"Water is overflowing from the drainage system",Water
+"The drainage pipe is blocked and water is stagnating",Water
+"There is a continuous leak from the main water pipe",Water
+"The sewage water is flowing onto the road",Water
+"Our area has not received water for three days",Water
+"The public water tap is damaged and leaking",Water
+"The streetlight is not working at night",Streetlight
+"The road is completely dark because the lamp is broken",Streetlight
+"Several streetlights have stopped functioning",Streetlight
+"The streetlight pole is damaged",Streetlight
+"There is no lighting near the public park",Streetlight
+"The street lamp keeps switching off",Streetlight
+"The electrical light on the main road is not working",Streetlight
+"The streetlights are not working near the bus stop",Streetlight
+"There is a stray animal creating problems in the locality",Other
+"A public park needs maintenance",Other
+"A traffic signal is not functioning properly",Other
+"The public toilet is in poor condition",Other
+"A tree has fallen and blocked the footpath",Other
+"There is a damaged public bench in the park",Other

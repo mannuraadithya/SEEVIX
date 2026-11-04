@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SEEVIX | All Complaints</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/complaints.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">S</div>
+            <div>
+                <h2>SEEVIX</h2>
+                <span>Civic Intelligence</span>
+            </div>
+        </div>
+
+        <div class="sidebar-label">MAIN MENU</div>
+
+        <nav class="navigation">
+
+            <a href="index.html" class="nav-link">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="report.html" class="nav-link">
+                <i data-lucide="plus-circle"></i>
+                <span>Report Issue</span>
+            </a>
+
+            <a href="track.html" class="nav-link">
+                <i data-lucide="search"></i>
+                <span>Track Complaint</span>
+            </a>
+
+            <a href="map.html" class="nav-link">
+                <i data-lucide="map"></i>
+                <span>Issues Map</span>
+            </a>
+
+            <div class="sidebar-label">MANAGEMENT</div>
+
+            <a href="#" class="nav-link">
+                <i data-lucide="brain-circuit"></i>
+                <span>AI Insights</span>
+            </a>
+
+            <a href="complaints.html" class="nav-link active">
+                <i data-lucide="clipboard-list"></i>
+                <span>All Complaints</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i data-lucide="chart-no-axes-combined"></i>
+                <span>Analytics</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="#" class="nav-link">
+                <i data-lucide="info"></i>
+                <span>About SEEVIX</span>
+            </a>
+
+            <div class="user-profile">
+                <div class="avatar">A</div>
+                <div>
+                    <strong>Administrator</strong>
+                    <span>Platform Manager</span>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div>
+                <span class="breadcrumb">
+                    Workspace / Management / All Complaints
+                </span>
+                <h2>Complaint Management</h2>
+            </div>
+
+            <div class="topbar-actions">
+
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    All systems operational
+                </div>
+
+                <button class="icon-button" aria-label="Notifications">
+                    <i data-lucide="bell"></i>
+                </button>
+
+                <div class="top-avatar">A</div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE CONTENT -->
+        <section class="dashboard-content complaints-content">
+
+            <!-- PAGE INTRO -->
+            <div class="welcome-section">
+
+                <div>
+                    <h1>All Complaints</h1>
+                    <p>
+                        Monitor, review and manage reported civic issues.
+                    </p>
+                </div>
+
+                <button class="primary-button" id="refreshButton">
+                    <i data-lucide="refresh-cw"></i>
+                    Refresh Data
+                </button>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Complaints</span>
+                        <div class="stat-icon blue">
+                            <i data-lucide="files"></i>
+                        </div>
+                    </div>
+                    <h2 id="totalCount">0</h2>
+                    <p class="stat-description">All reported issues</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Submitted</span>
+                        <div class="stat-icon orange">
+                            <i data-lucide="clock"></i>
+                        </div>
+                    </div>
+                    <h2 id="submittedCount">0</h2>
+                    <p class="stat-description">Awaiting review</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>In Progress</span>
+                        <div class="stat-icon purple">
+                            <i data-lucide="loader-circle"></i>
+                        </div>
+                    </div>
+                    <h2 id="progressCount">0</h2>
+                    <p class="stat-description">Currently being handled</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Resolved</span>
+                        <div class="stat-icon green">
+                            <i data-lucide="check-circle"></i>
+                        </div>
+                    </div>
+                    <h2 id="resolvedCount">0</h2>
+                    <p class="stat-description">Successfully resolved</p>
+                </div>
+
+            </div>
+
+
+            <!-- COMPLAINT MANAGEMENT PANEL -->
+            <div class="panel complaints-management-panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h3>Complaint Records</h3>
+                        <p>Manage all complaints received by SEEVIX</p>
+                    </div>
+                </div>
+
+
+                <!-- SEARCH AND FILTERS -->
+                <div class="complaint-toolbar">
+
+                    <div class="complaint-search">
+                        <i data-lucide="search"></i>
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search by ID or complaint title..."
+                        >
+                    </div>
+
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                    </select>
+
+                    <select id="priorityFilter">
+                        <option value="">All Priorities</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                        <option value="Urgent">Urgent</option>
+                    </select>
+
+                    <select id="statusFilter">
+                        <option value="">All Statuses</option>
+                        <option value="Submitted">Submitted</option>
+                        <option value="Under Review">Under Review</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                    </select>
+
+                </div>
+
+
+                <!-- TABLE -->
+                <div class="table-container">
+
+                    <table class="management-table">
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>COMPLAINT</th>
+                                <th>CATEGORY</th>
+                                <th>PRIORITY</th>
+                                <th>DATE</th>
+                                <th>STATUS</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="complaintsTableBody">
+
+                            <tr>
+                                <td colspan="7">
+                                    Loading complaints...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="complaint-table-footer">
+                    <span id="resultCount">Loading records...</span>
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+            <footer class="footer">
+                <span>© 2026 SEEVIX Civic Intelligence Platform</span>
+                <span>Building smarter and cleaner communities.</span>
+            </footer>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- COMPLAINT DETAILS MODAL -->
+<div class="complaint-modal" id="complaintModal">
+
+    <div class="complaint-modal-content">
+
+        <div class="modal-header">
+            <div>
+                <span class="breadcrumb">Complaint Details</span>
+                <h2 id="modalTitle">Complaint Information</h2>
+            </div>
+
+            <button id="closeModal" class="icon-button" aria-label="Close">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+
+        <div id="complaintDetails"></div>
+
+    </div>
+
+</div>
+
+
+<script src="js/complaints.js"></script>
+
+</body>
+</html>

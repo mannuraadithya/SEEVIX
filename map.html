@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issues Map | SEEVIX</title>
+
+    <link rel="stylesheet" href="css/map.css">
+
+    <!-- Leaflet map library -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+<header class="topbar">
+    <a href="index.html" class="brand">
+        <span class="brand-icon">S</span>
+        <span>SEEVIX</span>
+    </a>
+
+    <a href="index.html" class="back-link">
+        <i data-lucide="arrow-left"></i>
+        Back to Dashboard
+    </a>
+</header>
+
+<main class="container">
+
+    <section class="page-heading">
+        <div>
+            <span class="eyebrow">CIVIC INTELLIGENCE</span>
+            <h1>Issues Map</h1>
+            <p>Explore reported civic problems across different locations.</p>
+        </div>
+
+        <button class="refresh-button" id="refreshButton">
+            <i data-lucide="refresh-cw"></i>
+            Refresh Map
+        </button>
+    </section>
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon blue">
+                <i data-lucide="layers"></i>
+            </div>
+            <div>
+                <span>Total Complaints</span>
+                <h2 id="totalCount">0</h2>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon orange">
+                <i data-lucide="clock"></i>
+            </div>
+            <div>
+                <span>Pending</span>
+                <h2 id="pendingCount">0</h2>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon green">
+                <i data-lucide="check-circle"></i>
+            </div>
+            <div>
+                <span>Resolved</span>
+                <h2 id="resolvedCount">0</h2>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon purple">
+                <i data-lucide="map-pin"></i>
+            </div>
+            <div>
+                <span>Mapped Issues</span>
+                <h2 id="mappedCount">0</h2>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="map-layout">
+
+        <div class="map-card">
+
+            <div class="map-header">
+                <div>
+                    <h2>Geographical Issue Distribution</h2>
+                    <p>Explore complaints using their captured GPS locations.</p>
+                </div>
+
+                <span class="live-label">
+                    <span></span>
+                    LOCAL DATA
+                </span>
+            </div>
+
+            <div id="map"></div>
+
+            <div class="map-legend">
+                <span><i class="legend-dot road"></i> Road / Potholes</span>
+                <span><i class="legend-dot garbage"></i> Garbage</span>
+                <span><i class="legend-dot water"></i> Water Leakage</span>
+                <span><i class="legend-dot other"></i> Other</span>
+            </div>
+
+        </div>
+
+        <aside class="side-panel">
+
+            <div class="filter-card">
+                <h3>Filter Issues</h3>
+
+                <label for="categoryFilter">Category</label>
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="Road and Potholes">Road and Potholes</option>
+                    <option value="Garbage and Sanitation">Garbage and Sanitation</option>
+                    <option value="Streetlight">Streetlight</option>
+                    <option value="Water Leakage">Water Leakage</option>
+                    <option value="Drainage">Drainage</option>
+                    <option value="Public Property">Public Property</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="statusFilter">Status</label>
+                <select id="statusFilter">
+                    <option value="all">All Statuses</option>
+                    <option value="Submitted">Submitted</option>
+                    <option value="Under Review">Under Review</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+
+                <button id="applyFilters">Apply Filters</button>
+            </div>
+
+            <div class="issues-card">
+                <div class="issues-heading">
+                    <div>
+                        <h3>Reported Issues</h3>
+                        <p id="issueListCount">0 complaints</p>
+                    </div>
+                    <i data-lucide="list"></i>
+                </div>
+
+                <div id="issueList" class="issue-list">
+                    <div class="no-issues">
+                        No complaints available yet.
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+    </section>
+
+    <p class="map-note">
+        <i data-lucide="info"></i>
+        Map markers use GPS coordinates captured during complaint submission.
+        Complaints are retrieved directly from the SEEVIX backend and displayed using their saved GPS coordinates.
+    </p>
+
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/map.js"></script>
+
+</body>
+</html>

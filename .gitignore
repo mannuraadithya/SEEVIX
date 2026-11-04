@@ -1,0 +1,39 @@
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Java / Maven
+seevix-backend/target/
+*.class
+
+# Node
+node_modules/
+dist/
+
+# AI datasets and training outputs
+seevix-ai/dataset/
+seevix-ai/runs/
+
+# Trained model weights
+*.pt
+*.onnx
+*.pkl
+
+# Logs and cache
+*.log
+*.cache
+
+# IDE and operating system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

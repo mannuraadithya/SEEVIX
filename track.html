@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Complaint | SEEVIX</title>
+    <link rel="stylesheet" href="css/track.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+<header class="topbar">
+    <a href="index.html" class="brand">
+        <span class="brand-icon">S</span>
+        <span>SEEVIX</span>
+    </a>
+
+    <a href="index.html" class="back-link">
+        <i data-lucide="arrow-left"></i>
+        Back to Dashboard
+    </a>
+</header>
+
+<main class="container">
+
+    <section class="heading">
+        <span class="eyebrow">CITIZEN SERVICES</span>
+        <h1>Track Your Complaint</h1>
+        <p>Stay informed about the progress of your civic issue report.</p>
+    </section>
+
+    <section class="search-card">
+        <div class="search-icon">
+            <i data-lucide="search"></i>
+        </div>
+
+        <h2>Enter your complaint ID</h2>
+        <p>You can find this ID in your complaint submission confirmation.</p>
+
+        <form id="trackForm">
+            <div class="search-input">
+                <i data-lucide="ticket"></i>
+                <input
+                    type="text"
+                    id="complaintId"
+                    placeholder="Example: 1"
+                    required
+                >
+                <button type="submit">Track Complaint</button>
+            </div>
+        </form>
+
+        <p class="search-help">
+            <i data-lucide="info"></i>
+            Enter the complaint ID exactly as shown after submission.
+        </p>
+    </section>
+
+    <div class="error-message hidden" id="errorMessage">
+        <i data-lucide="alert-circle"></i>
+        <span id="errorText">Complaint not found.</span>
+    </div>
+
+    <section class="result-section hidden" id="resultSection">
+
+        <div class="result-header">
+            <div>
+                <span class="eyebrow">COMPLAINT DETAILS</span>
+                <h2 id="resultTitle">Complaint title</h2>
+                <p id="resultId">Complaint ID</p>
+            </div>
+
+            <span class="status-badge" id="statusBadge">Submitted</span>
+        </div>
+
+        <div class="details-grid">
+
+            <div class="detail-card">
+                <span class="detail-label">CATEGORY</span>
+                <strong id="resultCategory">-</strong>
+            </div>
+
+            <div class="detail-card">
+                <span class="detail-label">PRIORITY</span>
+                <strong id="resultPriority">-</strong>
+            </div>
+
+            <div class="detail-card">
+                <span class="detail-label">DATE SUBMITTED</span>
+                <strong id="resultDate">-</strong>
+            </div>
+
+            <div class="detail-card">
+                <span class="detail-label">LOCATION</span>
+                <strong id="resultAddress">-</strong>
+            </div>
+
+        </div>
+
+        <div class="timeline-card">
+            <div class="section-title">
+                <div>
+                    <h3>Complaint Progress</h3>
+                    <p>Follow the progress of your reported issue.</p>
+                </div>
+                <i data-lucide="git-branch"></i>
+            </div>
+
+            <div class="timeline" id="timeline">
+
+                <div class="timeline-item" data-status="Submitted">
+                    <div class="timeline-marker">
+                        <i data-lucide="check"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Complaint Submitted</h4>
+                        <p>Your complaint has been successfully received.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-status="Under Review">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4>Under Review</h4>
+                        <p>The complaint is waiting for verification.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-status="In Progress">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4>Work in Progress</h4>
+                        <p>The concerned department is working on the issue.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-status="Resolved">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4>Resolved</h4>
+                        <p>The reported issue has been addressed.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="description-card">
+            <h3>Complaint Description</h3>
+            <p id="resultDescription"></p>
+        </div>
+
+    </section>
+
+    <section class="empty-state" id="emptyState">
+        <div class="empty-icon">
+            <i data-lucide="clipboard-search"></i>
+        </div>
+        <h3>Your complaint details will appear here</h3>
+        <p>Enter a valid SEEVIX complaint ID above to view its status and details.</p>
+    </section>
+
+</main>
+
+<div class="footer">
+    SEEVIX — Building smarter and more responsive communities.
+</div>
+
+<script src="js/track.js"></script>
+</body>
+</html>
