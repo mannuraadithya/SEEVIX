@@ -1,0 +1,966 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About SEEVIX</title>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f3f6fa;
+    color: #263247;
+}
+
+.about-page {
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* CITY HERO */
+
+.city-hero {
+    position: relative;
+    height: 470px;
+    overflow: hidden;
+    background: #a9d8ee;
+}
+
+#cityCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.city-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(17, 42, 62, 0.55),
+        rgba(17, 42, 62, 0.12) 75%
+    );
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1150px;
+    margin: auto;
+    padding: 35px 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    width: fit-content;
+    padding: 10px 15px;
+    border: 1px solid rgba(255,255,255,.4);
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+}
+
+.back-link:hover {
+    background: rgba(255,255,255,.3);
+}
+
+.hero-title {
+    max-width: 650px;
+    color: white;
+    padding-bottom: 35px;
+    text-shadow: 0 2px 12px rgba(0,0,0,.2);
+}
+
+.hero-title span {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: #e2f3ff;
+}
+
+.hero-title h1 {
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.1;
+    margin-bottom: 15px;
+}
+
+.hero-title p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #f0f7fc;
+}
+
+/* MAIN CONTENT */
+
+.about-container {
+    max-width: 1150px;
+    padding: 45px 25px;
+    margin: auto;
+}
+
+.intro-card {
+    background: white;
+    border: 1px solid #e8edf3;
+    border-radius: 17px;
+    padding: 34px;
+    margin-bottom: 25px;
+    box-shadow: 0 7px 25px rgba(30,55,85,.04);
+}
+
+.section-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    color: #4775ed;
+    margin-bottom: 12px;
+}
+
+.intro-card h2 {
+    font-size: 25px;
+    margin-bottom: 15px;
+    color: #25334a;
+}
+
+.intro-card p {
+    color: #6b7b90;
+    line-height: 1.9;
+    max-width: 900px;
+    font-size: 15px;
+}
+
+/* FEATURES */
+
+.features-section {
+    background: white;
+    padding: 35px;
+    border: 1px solid #e8edf3;
+    border-radius: 17px;
+    margin-bottom: 25px;
+    box-shadow: 0 7px 25px rgba(30,55,85,.04);
+}
+
+.features-section h2 {
+    font-size: 23px;
+    margin-bottom: 25px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.feature-card {
+    padding: 24px;
+    background: #f8faff;
+    border: 1px solid #edf1f7;
+    border-radius: 13px;
+    transition: .25s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: #b8caff;
+    box-shadow: 0 10px 25px rgba(55,100,220,.08);
+}
+
+.feature-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e9efff;
+    color: #416bea;
+    margin-bottom: 17px;
+}
+
+.feature-card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #718096;
+}
+
+/* MISSION */
+
+.mission-card {
+    padding: 35px;
+    border-radius: 17px;
+    background: linear-gradient(120deg, #e9f0ff, #f5f8ff);
+    border: 1px solid #dce6ff;
+    margin-bottom: 25px;
+}
+
+.mission-card h2 {
+    margin-bottom: 14px;
+    font-size: 23px;
+}
+
+.mission-card p {
+    color: #596d89;
+    line-height: 1.9;
+    max-width: 850px;
+}
+
+/* FOOTER */
+
+.about-footer {
+    text-align: center;
+    padding: 25px 10px;
+    color: #8190a3;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.about-footer strong {
+    color: #416bea;
+    font-size: 19px;
+    letter-spacing: 2px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 750px) {
+    .city-hero {
+        height: 390px;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-title h1 {
+        font-size: 40px;
+    }
+}
+
+@media(max-width: 500px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content {
+        padding: 22px;
+    }
+
+    .about-container {
+        padding: 25px 14px;
+    }
+
+    .intro-card,
+    .features-section,
+    .mission-card {
+        padding: 23px;
+    }
+}
+
+@media(prefers-reduced-motion: reduce) {
+    #cityCanvas {
+        animation: none;
+    }
+}
+
+/* ================================
+   SEEVIX HERO SECTION FIX
+================================ */
+
+.city-hero {
+    height: 470px !important;
+    min-height: 470px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+#cityCanvas {
+    z-index: 0;
+}
+
+.city-overlay {
+    z-index: 1;
+    background: linear-gradient(
+        90deg,
+        rgba(13, 35, 51, 0.48) 0%,
+        rgba(13, 35, 51, 0.18) 65%,
+        rgba(13, 35, 51, 0.08) 100%
+    );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: block;
+    padding: 26px 30px !important;
+}
+
+.back-link {
+    position: relative;
+    z-index: 3;
+}
+
+.hero-title {
+    margin-top: 58px;
+    padding: 22px 28px 24px !important;
+    width: fit-content;
+    max-width: min(720px, 100%);
+    border-radius: 14px;
+
+    background: rgba(15, 39, 55, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    box-shadow: 0 10px 30px rgba(10, 25, 38, 0.2);
+    backdrop-filter: blur(5px);
+
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-title span {
+    color: #e8f5ff;
+    margin-bottom: 14px;
+}
+
+.hero-title h1 {
+    color: #ffffff;
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.1;
+    margin-bottom: 12px;
+}
+
+.hero-title p {
+    color: #f4f8fb;
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 560px;
+}
+
+/* TABLET */
+
+@media (max-width: 750px) {
+    .city-hero {
+        height: 430px !important;
+        min-height: 430px;
+    }
+
+    .hero-title {
+        margin-top: 65px;
+        padding: 20px !important;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+    .city-hero {
+        height: 420px !important;
+        min-height: 420px;
+    }
+
+    .hero-content {
+        padding: 20px 16px !important;
+    }
+
+    .hero-title {
+        margin-top: 70px;
+        width: 100%;
+        padding: 20px !important;
+    }
+
+    .hero-title p {
+        font-size: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="about-page">
+
+    <!-- ANIMATED CITY HERO -->
+
+    <section class="city-hero">
+
+        <canvas id="cityCanvas"></canvas>
+
+        <div class="city-overlay"></div>
+
+        <div class="hero-content">
+
+            <a href="index.html" class="back-link">
+                <i data-lucide="arrow-left"></i>
+                Back to Dashboard
+            </a>
+
+            <div class="hero-title">
+                <span>Building Better Communities</span>
+                <h1>About SEEVIX</h1>
+                <p>
+                    Making our cities smarter, safer and cleaner
+                    through intelligent technology.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="about-container">
+
+        <section class="intro-card">
+
+            <div class="section-label">Who We Are</div>
+
+            <h2>Technology for Better Cities</h2>
+
+            <p>
+                SEEVIX is an AI-powered civic issue reporting platform
+                designed to bridge the gap between citizens and local
+                authorities. It helps identify, report and track everyday
+                civic problems through intelligent technology.
+                Our goal is to make civic reporting simpler, faster
+                and more accessible.
+            </p>
+
+        </section>
+
+
+        <!-- FEATURES -->
+
+        <section class="features-section">
+
+            <h2>What SEEVIX Offers</h2>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="clipboard-plus"></i>
+                    </div>
+                    <h3>Smart Issue Reporting</h3>
+                    <p>
+                        Submit civic complaints with descriptions,
+                        images and relevant details.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="scan-eye"></i>
+                    </div>
+                    <h3>AI-Powered Detection</h3>
+                    <p>
+                        Uses computer vision to identify potholes
+                        and streetlight-related issues.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="brain-circuit"></i>
+                    </div>
+                    <h3>Automatic Classification</h3>
+                    <p>
+                        AI analyses complaint descriptions and
+                        suggests categories and priorities.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="map-pin"></i>
+                    </div>
+                    <h3>Interactive Issue Map</h3>
+                    <p>
+                        View reported civic problems through
+                        a location-based map.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="activity"></i>
+                    </div>
+                    <h3>Complaint Tracking</h3>
+                    <p>
+                        Monitor the progress and status
+                        of submitted complaints.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h3>Citizen Participation</h3>
+                    <p>
+                        Encourage citizens to participate
+                        in improving their communities.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MISSION -->
+
+        <section class="mission-card">
+
+            <h2>Our Mission</h2>
+
+            <p>
+                To empower citizens, improve civic accountability
+                and contribute towards building cleaner, safer
+                and smarter communities through technology
+                and artificial intelligence.
+            </p>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="about-footer">
+
+            <strong>SEEVIX</strong>
+
+            <p>Your City. Your Voice. Your Responsibility.</p>
+
+            <p>© 2026 SEEVIX Civic Intelligence Platform</p>
+
+        </footer>
+
+    </div>
+
+</main>
+
+
+<!-- CITY ANIMATION ENGINE -->
+
+<script>
+lucide.createIcons();
+
+const canvas = document.getElementById("cityCanvas");
+const ctx = canvas.getContext("2d");
+
+let width, height, dpr;
+
+function resizeCanvas() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+const clouds = Array.from({length: 6}, (_, i) => ({
+    x: Math.random() * 1500,
+    y: 35 + Math.random() * 110,
+    speed: 0.12 + Math.random() * 0.2,
+    scale: 0.6 + Math.random() * 0.7
+}));
+
+const birds = Array.from({length: 7}, (_, i) => ({
+    x: Math.random() * 1500,
+    y: 65 + Math.random() * 100,
+    speed: 0.5 + Math.random() * 0.4
+}));
+
+const cars = [
+    {x: -100, speed: 1.5, color: "#e75d51", scale: 1},
+    {x: 250, speed: 1.9, color: "#f4f4f1", scale: 0.9},
+    {x: 650, speed: 1.3, color: "#e8b74d", scale: 1.05},
+    {x: 1050, speed: 2.2, color: "#547da7", scale: 0.85},
+    {x: 1450, speed: 1.7, color: "#eeeeec", scale: 1}
+];
+
+const trees = [];
+
+function drawCloud(x, y, scale) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(scale, scale);
+
+    ctx.fillStyle = "rgba(255,255,255,0.83)";
+
+    ctx.beginPath();
+    ctx.arc(0, 15, 18, 0, Math.PI * 2);
+    ctx.arc(20, 4, 24, 0, Math.PI * 2);
+    ctx.arc(45, 13, 19, 0, Math.PI * 2);
+    ctx.rect(0, 10, 45, 25);
+    ctx.fill();
+
+    ctx.restore();
+}
+
+function drawBuilding(x, base, w, h, color, style) {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, base - h, w, h);
+
+    // Roof details
+    if(style === 1) {
+        ctx.fillStyle = "#536e7f";
+        ctx.fillRect(x + w * .15, base - h - 9, w * .7, 9);
+    }
+
+    // Windows
+    const rows = Math.floor(h / 23);
+    const cols = Math.max(2, Math.floor(w / 16));
+
+    for(let r = 0; r < rows; r++) {
+        for(let c = 0; c < cols; c++) {
+            ctx.fillStyle = r % 2 === 0
+                ? "rgba(222,240,245,.8)"
+                : "rgba(231,244,247,.65)";
+
+            ctx.fillRect(
+                x + 7 + c * 16,
+                base - h + 12 + r * 23,
+                8,
+                12
+            );
+        }
+    }
+
+    // Side shadow
+    ctx.fillStyle = "rgba(30,60,80,.10)";
+    ctx.fillRect(x + w - 5, base - h, 5, h);
+}
+
+function drawTree(x, base, scale) {
+    ctx.save();
+    ctx.translate(x, base);
+    ctx.scale(scale, scale);
+
+    ctx.fillStyle = "#795e45";
+    ctx.fillRect(-4, -36, 8, 36);
+
+    ctx.fillStyle = "#578c63";
+    ctx.beginPath();
+    ctx.arc(0, -49, 18, 0, Math.PI * 2);
+    ctx.arc(-11, -40, 13, 0, Math.PI * 2);
+    ctx.arc(11, -40, 13, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "rgba(255,255,255,.13)";
+    ctx.beginPath();
+    ctx.arc(-5, -54, 7, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+}
+
+function drawStreetlight(x, base) {
+    ctx.strokeStyle = "#596b72";
+    ctx.lineWidth = 3;
+
+    ctx.beginPath();
+    ctx.moveTo(x, base);
+    ctx.lineTo(x, base - 83);
+    ctx.lineTo(x + 19, base - 83);
+    ctx.stroke();
+
+    ctx.fillStyle = "#ffe9a5";
+    ctx.beginPath();
+    ctx.ellipse(x + 20, base - 82, 7, 4, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "rgba(255,230,160,.10)";
+    ctx.beginPath();
+    ctx.arc(x + 20, base - 82, 18, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+function drawCar(car, y) {
+    ctx.save();
+
+    ctx.translate(car.x, y);
+    ctx.scale(car.scale, car.scale);
+
+    // Shadow
+    ctx.fillStyle = "rgba(25,40,50,.16)";
+    ctx.beginPath();
+    ctx.ellipse(0, 13, 38, 6, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Car body
+    ctx.fillStyle = car.color;
+    ctx.beginPath();
+    ctx.moveTo(-35, -2);
+    ctx.lineTo(-28, -15);
+    ctx.lineTo(-12, -23);
+    ctx.lineTo(17, -23);
+    ctx.lineTo(29, -10);
+    ctx.lineTo(36, -5);
+    ctx.lineTo(36, 7);
+    ctx.lineTo(-35, 7);
+    ctx.closePath();
+    ctx.fill();
+
+    // Windows
+    ctx.fillStyle = "#b9d8e6";
+    ctx.beginPath();
+    ctx.moveTo(-20, -15);
+    ctx.lineTo(-10, -21);
+    ctx.lineTo(7, -21);
+    ctx.lineTo(16, -11);
+    ctx.lineTo(-22, -11);
+    ctx.fill();
+
+    // Wheels
+    ctx.fillStyle = "#29323a";
+
+    [-22, 23].forEach(x => {
+        ctx.beginPath();
+        ctx.arc(x, 7, 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#bfc7ca";
+        ctx.beginPath();
+        ctx.arc(x, 7, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#29323a";
+    });
+
+    // Headlight
+    ctx.fillStyle = "#fff5bd";
+    ctx.fillRect(31, -4, 5, 5);
+
+    ctx.restore();
+}
+
+function drawBus(x, y) {
+    ctx.save();
+    ctx.translate(x, y);
+
+    ctx.fillStyle = "rgba(20,35,45,.15)";
+    ctx.beginPath();
+    ctx.ellipse(0, 13, 52, 6, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "#e4ad45";
+    ctx.fillRect(-48, -32, 96, 39);
+
+    ctx.fillStyle = "#b9d8e7";
+
+    for(let i = 0; i < 5; i++) {
+        ctx.fillRect(-40 + i * 17, -26, 13, 16);
+    }
+
+    ctx.fillStyle = "#303b44";
+    ctx.beginPath();
+    ctx.arc(-29, 8, 7, 0, Math.PI * 2);
+    ctx.arc(30, 8, 7, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+}
+
+function drawBird(bird, time) {
+    const flap = Math.sin(time * 0.009 + bird.x) * 3;
+
+    ctx.strokeStyle = "#526d7b";
+    ctx.lineWidth = 1.5;
+
+    ctx.beginPath();
+    ctx.moveTo(bird.x - 7, bird.y);
+    ctx.quadraticCurveTo(bird.x - 3, bird.y - flap, bird.x, bird.y);
+    ctx.quadraticCurveTo(bird.x + 4, bird.y - flap, bird.x + 8, bird.y);
+    ctx.stroke();
+}
+
+function drawCity(time) {
+    ctx.clearRect(0, 0, width, height);
+
+    // Sky
+    const sky = ctx.createLinearGradient(0, 0, 0, height);
+    sky.addColorStop(0, "#82c9ec");
+    sky.addColorStop(.65, "#c8e9f3");
+    sky.addColorStop(1, "#e8f1e9");
+
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, width, height);
+
+    // Sun
+    ctx.fillStyle = "#fff0b6";
+    ctx.beginPath();
+    ctx.arc(width * .78, 85, 34, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Clouds
+    clouds.forEach(cloud => {
+        drawCloud(cloud.x, cloud.y, cloud.scale);
+        cloud.x += cloud.speed;
+
+        if(cloud.x > width + 130) cloud.x = -150;
+    });
+
+    // Distant skyline
+    ctx.fillStyle = "#a9c8ce";
+
+    for(let i = 0; i < 17; i++) {
+        const x = i * (width / 15) - 30;
+        const h = 75 + (i * 37 % 75);
+        const w = 45 + (i * 11 % 30);
+
+        ctx.fillRect(x, 285 - h, w, h);
+    }
+
+    // Main buildings
+    const buildings = [
+        {x: 0, w: 90, h: 155, c:"#9babb0"},
+        {x: 92, w: 105, h: 220, c:"#a9b9bd"},
+        {x: 200, w: 80, h: 180, c:"#829da7"},
+        {x: 283, w: 120, h: 240, c:"#b3c4c6"},
+        {x: 407, w: 95, h: 170, c:"#8fa8ad"},
+        {x: 505, w: 120, h: 210, c:"#9db4b9"},
+        {x: 630, w: 90, h: 180, c:"#8ca5aa"},
+        {x: 725, w: 115, h: 230, c:"#afbdbe"}
+    ];
+
+    buildings.forEach((b, i) => {
+        const scale = width / 840;
+        drawBuilding(
+            b.x * scale,
+            300,
+            b.w * scale,
+            b.h * scale,
+            b.c,
+            i % 2
+        );
+    });
+
+    // Trees and roadside
+    ctx.fillStyle = "#b9c9a0";
+    ctx.fillRect(0, 300, width, 45);
+
+    for(let x = 25; x < width; x += 90) {
+        drawTree(x, 346, Math.max(.65, width / 1100));
+    }
+
+    // Streetlights
+    for(let x = 70; x < width; x += 260) {
+        drawStreetlight(x, 345);
+    }
+
+    // Road
+    const roadY = height - 83;
+
+    ctx.fillStyle = "#505c63";
+    ctx.fillRect(0, roadY, width, 83);
+
+    // Road edges
+    ctx.fillStyle = "#e5e6dc";
+    ctx.fillRect(0, roadY, width, 5);
+
+    // Road marking
+    ctx.fillStyle = "#f7edcf";
+
+    const offset = (time * .08) % 110;
+
+    for(let x = -110; x < width + 110; x += 110) {
+        ctx.fillRect(x - offset, roadY + 42, 47, 3);
+    }
+
+    // Traffic
+    cars.forEach((car, i) => {
+        car.x += car.speed;
+
+        if(car.x > width + 100) car.x = -110;
+
+        drawCar(car, roadY + 29 + (i % 2) * 35);
+    });
+
+    // Bus
+    const busX = (time * .035) % (width + 150) - 100;
+    drawBus(busX, roadY + 72);
+
+    // Birds
+    birds.forEach(bird => {
+        bird.x += bird.speed;
+        if(bird.x > width + 20) bird.x = -20;
+        drawBird(bird, time);
+    });
+
+    // Foreground shadow
+    const shade = ctx.createLinearGradient(0, roadY - 30, 0, height);
+    shade.addColorStop(0, "rgba(30,50,50,0)");
+    shade.addColorStop(1, "rgba(30,50,50,.12)");
+
+    ctx.fillStyle = shade;
+    ctx.fillRect(0, roadY - 30, width, height - roadY + 30);
+}
+
+let animationFrame;
+
+function animate(time) {
+    drawCity(time);
+    animationFrame = requestAnimationFrame(animate);
+}
+
+const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+);
+
+if (!reducedMotion.matches) {
+    animate(0);
+} else {
+    drawCity(0);
+}
+
+reducedMotion.addEventListener("change", event => {
+    if (event.matches) {
+        cancelAnimationFrame(animationFrame);
+        drawCity(0);
+    } else {
+        animate(0);
+    }
+});
+
+</script>
+
+</body>
+</html>
