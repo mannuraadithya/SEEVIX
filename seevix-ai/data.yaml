@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['0']
+
+roboflow:
+  workspace: arya-shenvi
+  project: water-leak-wgdaq-fdjd5
+  version: 1
+  license: CC BY 4.0
+  url: https://app.roboflow.com/arya-shenvi/water-leak-wgdaq-fdjd5/1

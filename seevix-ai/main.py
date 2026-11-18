@@ -107,7 +107,35 @@ def get_streetlight_model():
         print("Streetlight YOLO11n model loaded successfully!")
 
     return streetlight_model
+# ==========================================
+# WATER LEAKAGE YOLO MODEL
+# ==========================================
 
+waterleak_model = None
+
+
+def get_waterleak_model():
+    global waterleak_model
+
+    if waterleak_model is None:
+        print("Loading SEEVIX Water Leakage YOLO11n model...")
+
+        model_path = (
+            BASE_DIR
+            / "runs/detect/runs/detect/seevix_runs/"
+            / "waterleak_yolo11n-4/weights/best.pt"
+        )
+
+        if not model_path.exists():
+            raise FileNotFoundError(
+                f"Water Leakage model not found: {model_path}"
+            )
+
+        waterleak_model = YOLO(str(model_path))
+
+        print("Water Leakage YOLO11n model loaded successfully!")
+
+    return waterleak_model
 
 # ==========================================
 # REQUEST MODEL
@@ -440,7 +468,97 @@ async def detect_streetlight(file: UploadFile = File(...)):
             detail="Streetlight detection failed. Check the AI server terminal."
         )
 
+# ==========================================
+# WATER LEAKAGE DETECTION API
+# ==========================================
 
+@app.post("/ai/detect-waterleak")
+async def detect_waterleak(file: UploadFile = File(...)):
+
+    if file.content_type not in [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+    ]:
+        raise HTTPException(
+            status_code=400,
+            detail="Please upload a JPG, PNG or WEBP image."
+        )
+
+    image_bytes = await file.read()
+
+    try:
+        image = Image.open(
+            BytesIO(image_bytes)
+        ).convert("RGB")
+
+    except (UnidentifiedImageError, OSError):
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid image file."
+        )
+
+    try:
+        detector = get_waterleak_model()
+
+        results = detector.predict(
+            source=image,
+            conf=0.05,
+            verbose=False
+        )
+
+        result = results[0]
+        detections = []
+
+        if result.boxes is not None:
+
+            for box in result.boxes:
+
+                class_id = int(box.cls.item())
+                confidence = float(box.conf.item())
+
+                detections.append({
+                    "object": result.names[class_id],
+                    "confidence": round(confidence * 100, 2),
+                    "bounding_box": [
+                        round(float(value), 2)
+                        for value in box.xyxy[0].tolist()
+                    ]
+                })
+
+        annotated = result.plot()
+        annotated_rgb = annotated[:, :, ::-1]
+
+        output_image = Image.fromarray(
+            np.asarray(annotated_rgb)
+        )
+
+        buffer = BytesIO()
+        output_image.save(buffer, format="JPEG")
+
+        encoded_image = base64.b64encode(
+            buffer.getvalue()
+        ).decode("utf-8")
+
+        return {
+            "success": True,
+            "model": "Water Leakage YOLO11n",
+            "image_size": {
+                "width": image.width,
+                "height": image.height
+            },
+            "total_detections": len(detections),
+            "detections": detections,
+            "annotated_image": encoded_image
+        }
+
+    except Exception as error:
+        print("Water Leakage detection error:", error)
+
+        raise HTTPException(
+            status_code=500,
+            detail="Water Leakage detection failed. Check the AI server terminal."
+        )
 # ==========================================
 # BLIP VQA IMAGE ANALYSIS
 # ==========================================

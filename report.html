@@ -80,9 +80,9 @@
 
                             <option value="Streetlight">Streetlight</option>
 
-                            <option value="Water">Water Leakage</option>
-
-                            <option value="Water">Drainage</option>
+                            <option value="water-leakage">Water Leakage</option>
+                            
+                            <option value="drainage">Drainage</option>
 
                             <option value="Other">Public Property</option>
 
@@ -254,6 +254,20 @@
                         <p id="aiStatus">
                             Waiting for image analysis...
                         </p>
+                        <!-- BLIP IMAGE CAPTION -->
+
+<div id="blipCaptionSection" class="blip-caption hidden">
+
+    <h4>
+        <i data-lucide="message-square-text"></i>
+        AI Image Description
+    </h4>
+
+    <p id="blipCaption">
+        Waiting for AI description...
+    </p>
+
+</div>
 
                         <div id="aiResults" class="ai-results hidden">
 

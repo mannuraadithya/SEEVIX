@@ -1,6 +1,9 @@
 
 document.addEventListener("DOMContentLoaded", () => {
-    lucide.createIcons();
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
 
     // =================================
     // API URLS
@@ -13,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const STREETLIGHT_AI_URL =
         "http://127.0.0.1:8000/ai/detect-streetlight";
+     const WATERLEAK_AI_URL =
+    "http://127.0.0.1:8000/ai/detect-waterleak";
 
     const BLIP_URL =
         "http://127.0.0.1:8000/ai/caption-image";
@@ -39,6 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const aiResults = document.getElementById("aiResults");
     const detectionList = document.getElementById("detectionList");
     const annotatedImage = document.getElementById("annotatedImage");
+
+    // BLIP caption elements
+    const blipCaptionSection =
+        document.getElementById("blipCaptionSection");
+
+    const blipCaption =
+        document.getElementById("blipCaption");
 
     // Location elements
     const locationButton = document.getElementById("locationButton");
@@ -85,8 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // =================================
     // CATEGORY CHANGE
     // =================================
-
-    // Re-run AI analysis when category changes
 
     document.getElementById("category").addEventListener("change", () => {
 
@@ -147,18 +157,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function resetAIAnalysis() {
 
-    imageScanId++;
+        imageScanId++;
 
-    aiAnalysis.classList.add("hidden");
-    aiResults.classList.add("hidden");
+        aiAnalysis.classList.add("hidden");
+        aiResults.classList.add("hidden");
 
-    detectionList.innerHTML = "";
+        detectionList.innerHTML = "";
 
-    annotatedImage.src = "";
-    annotatedImage.classList.add("hidden");
+        annotatedImage.src = "";
+        annotatedImage.classList.add("hidden");
 
-    lastAICaption = "";
-}
+        blipCaption.textContent = "";
+        blipCaptionSection.classList.add("hidden");
+
+        lastAICaption = "";
+    }
 
 
     // =================================
@@ -177,6 +190,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         detectionList.innerHTML = "";
         annotatedImage.src = "";
+        annotatedImage.classList.add("hidden");
+
+        blipCaption.textContent = "";
+        blipCaptionSection.classList.add("hidden");
 
 
         // =================================
@@ -194,11 +211,13 @@ document.addEventListener("DOMContentLoaded", () => {
             detectionURL = POTHOLE_AI_URL;
 
         } else if (category === "streetlight") {
-
             // Broken streetlight detection model
             detectionURL = STREETLIGHT_AI_URL;
 
-        }
+        } else if (category === "water-leakage") {
+           // Water Leakage detection model
+           detectionURL = WATERLEAK_AI_URL;
+    }
 
 
         // =================================
@@ -354,12 +373,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (data.annotated_image) {
 
-    annotatedImage.src =
-        `data:image/jpeg;base64,${data.annotated_image}`;
+                    annotatedImage.src =
+                        `data:image/jpeg;base64,${data.annotated_image}`;
 
-    annotatedImage.classList.remove("hidden");
-
-}
+                    annotatedImage.classList.remove("hidden");
+                }
 
             }
 
@@ -384,6 +402,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (blipData.caption) {
 
+                // Display BLIP caption in AI Analysis section
+
+                blipCaption.textContent = blipData.caption;
+
+                blipCaptionSection.classList.remove("hidden");
+
+                // Insert caption into complaint description
+
                 insertAICaption(blipData.caption);
 
                 console.log(
@@ -392,6 +418,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
             } else {
+
+                blipCaption.textContent =
+                    "No image description was generated.";
+
+                blipCaptionSection.classList.remove("hidden");
 
                 console.warn(
                     "BLIP response does not contain a caption."
@@ -404,6 +435,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 "BLIP error:",
                 blipResult.reason
             );
+
+            blipCaption.textContent =
+                "BLIP image description is currently unavailable.";
+
+            blipCaptionSection.classList.remove("hidden");
         }
 
         lucide.createIcons();
@@ -455,6 +491,10 @@ document.addEventListener("DOMContentLoaded", () => {
             imageName.textContent = file.name;
 
             preview.classList.remove("hidden");
+        };
+
+        reader.onerror = () => {
+            showToast("Unable to preview this image.");
         };
 
         reader.readAsDataURL(file);
