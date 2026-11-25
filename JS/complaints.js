@@ -152,20 +152,20 @@ function renderComplaints(complaints) {
         const row = document.createElement("tr");
 
         const values = [
-            `#${complaint.id}`,
-            complaint.title || "Untitled",
-            complaint.category || "N/A",
-            complaint.priority || "N/A",
-            complaint.status || "Submitted",
-            formatDate(complaint.submittedAt)
-        ];
+    `#${complaint.id}`,
+    complaint.title || "Untitled",
+    complaint.category || "N/A",
+    complaint.priority || "N/A",
+    formatDate(complaint.submittedAt),
+    complaint.status || "Submitted"
+];
 
         values.forEach((value, index) => {
             const cell = document.createElement("td");
 
             if (index === 3) {
                 cell.appendChild(createBadge(value, "priority"));
-            } else if (index === 4) {
+            } else if (index === 5) {
                 cell.appendChild(createBadge(value, "status"));
             } else {
                 cell.textContent = value;

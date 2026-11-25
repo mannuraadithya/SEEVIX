@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "http://127.0.0.1:8000/ai/detect-streetlight";
      const WATERLEAK_AI_URL =
     "http://127.0.0.1:8000/ai/detect-waterleak";
+    const GARBAGE_AI_URL =
+    "http://127.0.0.1:8000/ai/detect-garbage";
 
     const BLIP_URL =
         "http://127.0.0.1:8000/ai/caption-image";
@@ -215,9 +217,16 @@ document.addEventListener("DOMContentLoaded", () => {
             detectionURL = STREETLIGHT_AI_URL;
 
         } else if (category === "water-leakage") {
-           // Water Leakage detection model
-           detectionURL = WATERLEAK_AI_URL;
-    }
+    // Water Leakage detection model
+    detectionURL = WATERLEAK_AI_URL;
+
+} else if (
+    category === "garbage" ||
+    category === "garbage and sanitation"
+) {
+    // Garbage and Sanitation detection model
+    detectionURL = GARBAGE_AI_URL;
+}
 
 
         // =================================
